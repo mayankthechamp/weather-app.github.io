@@ -5,8 +5,7 @@ function App() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=a6a76d4c0b1b3aa8e42a4ad3cf11bfa1`
-
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=a6a76d4c0b1b3aa8e42a4ad3cf11bfa1&units=metric`
   const searchLocation = (event) => {
     if (event.key === 'Enter') {
       axios.get(url).then((response) => {
@@ -33,7 +32,7 @@ function App() {
             <p>{data.name}</p>
           </div>
           <div className="temp">
-            {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null}
+            {data.main ? <h1>{data.main.feels_like.toFixed()}°C</h1> : null}
           </div>
           <div className="description">
             {data.weather ? <p>{data.weather[0].main}</p> : null}
@@ -43,7 +42,7 @@ function App() {
         {data.name !== undefined &&
           <div className="bottom">
             <div className="feels">
-              {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
+              {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°C</p> : null}
               <p>Feels Like</p>
             </div>
             <div className="humidity">
